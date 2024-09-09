@@ -24,6 +24,32 @@ function determinePerformanceRating(averageSales){
 }
 
 //Test
-const averageSales = 8500;
+const averageSales = 3500;
 const performanceRating = determinePerformanceRating(averageSales);
 console.log(`The performance rating is: ${performanceRating}`);
+
+// Task 3: Create a Function to Identify Top and Bottom Performers
+
+function findTopAndBottomPerformers(salespersons){
+    if (salespersons.length === 0) 
+        return {topPerformer: null, bottomPerformer: null}
+    const topPerformer = salespersons.reduce((max, sPerson) =>
+        sPerson.sales > max.sales ? sPerson : max, salespersons[0])
+    const bottomPerformer = salespersons.reduce((min,sPerson) =>
+        sPerson.sales < min.sales ? sPerson : min, salespersons[0])
+    return {topPerformer, bottomPerformer};  
+};
+
+const salespersons = [
+    {name: "Hazel", sales: 10},
+    {name: "Steven", sales: 15},
+    {name: "Ricky", sales: 20},
+    {name: "Brian", sales: 25},
+    {name: "Alan", sales: 30},
+];
+
+//Test
+const performers = findTopAndBottomPerformers(salespersons);
+
+console.log("Top Performer:", performers.topPerformer);
+console.log("Bottom Performer:", performers.bottomPerformer);
