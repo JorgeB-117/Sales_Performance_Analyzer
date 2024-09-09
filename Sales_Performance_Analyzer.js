@@ -14,7 +14,7 @@ function determinePerformanceRating(averageSales){
         return "Good";
     if (averageSales >= 4000 && averageSales < 7000)
         return "Satisfactory";
-    if (averageSales <= 4000);
+    if (averageSales <= 4000)
         return "Needs Improvement";
 }
 
@@ -36,7 +36,7 @@ function generatePerformanceReport(salespersons) {
     const report = salespersons.map(sPerson => {
         const averageSales = calculateAverageSales(sPerson.sales);
         const performanceRating = determinePerformanceRating(averageSales);
-        return {sPerson, averageSales, performanceRating};
+        return {...sPerson, averageSales, performanceRating};
 });
 
 const {topPerformer, bottomPerformer} = findTopAndBottomPerformers(report);
