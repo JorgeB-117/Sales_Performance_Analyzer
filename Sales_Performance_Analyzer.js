@@ -5,11 +5,6 @@ function calculateAverageSales(sales) {
     return totalSales / sales.length;
 }
 
-//Test
-const salesFigures = [200, 400, 600, 800, 1000];
-const average = calculateAverageSales(salesFigures);
-console.log(`The average sales figure is $${average}`);
-
 // Task 2: Create a Function to Determine Performance Rating
 
 function determinePerformanceRating(averageSales){
@@ -23,11 +18,6 @@ function determinePerformanceRating(averageSales){
         return "Needs Improvement";
 }
 
-//Test
-const averageSales = 3500;
-const performanceRating = determinePerformanceRating(averageSales);
-console.log(`The performance rating is: ${performanceRating}`);
-
 // Task 3: Create a Function to Identify Top and Bottom Performers
 
 function findTopAndBottomPerformers(salespersons){
@@ -40,16 +30,28 @@ function findTopAndBottomPerformers(salespersons){
     return {topPerformer, bottomPerformer};  
 };
 
+// Task 4: Combine Functions to Generate a Performance Report
+
+function generatePerformanceReport(salespersons) {
+    const report = salespersons.map(sPerson => {
+        const averageSales = calculateAverageSales(sPerson.sales);
+        const performanceRating = determinePerformanceRating(averageSales);
+        return {sPerson, averageSales, performanceRating};
+});
+
+const {topPerformer, bottomPerformer} = findTopAndBottomPerformers(report);
+
+return {salesReport: report, topPerformer, bottomPerformer};
+}
+
 const salespersons = [
-    {name: "Hazel", sales: 10},
-    {name: "Steven", sales: 15},
-    {name: "Ricky", sales: 20},
-    {name: "Brian", sales: 25},
-    {name: "Alan", sales: 30},
+    { name: 'Alice', sales: [12000, 15000, 13000] },
+    { name: 'Bob', sales: [7000, 6000, 7500] },
+    { name: 'Charlie', sales: [3000, 4000, 3500] },
+    { name: 'Diana', sales: [9000, 8500, 9200] },
 ];
 
-//Test
-const performers = findTopAndBottomPerformers(salespersons);
-
-console.log("Top Performer:", performers.topPerformer);
-console.log("Bottom Performer:", performers.bottomPerformer);
+const report = generatePerformanceReport(salespersons);
+console.log("Sales Report:", report.salesReport);
+console.log("Top Performer:", report.topPerformer);
+console.log("Bottom Performer:", report.bottomPerformer);
